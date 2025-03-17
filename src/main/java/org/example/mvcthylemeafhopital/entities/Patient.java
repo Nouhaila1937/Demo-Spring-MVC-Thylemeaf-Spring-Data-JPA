@@ -1,4 +1,4 @@
-package org.example.mvcthylemeafhopital;
+package org.example.mvcthylemeafhopital.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
