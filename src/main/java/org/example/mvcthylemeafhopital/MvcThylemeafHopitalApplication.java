@@ -24,5 +24,6 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
         patient.setDateNaissance(new Date());
         patient.setScore(21);
         patient.setMalade(false);
+        patientRepository.save(patient);
     }
 }
