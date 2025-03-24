@@ -1,5 +1,8 @@
 <!Doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/lthymeeaf/layout"
+      layout:decorate="template1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +10,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body>
+<div layout:fragment="content1">
 <div class="p-3">
 <div class="card">
     <div class="card-header"> Liste Patients </div>
@@ -21,7 +25,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Dtae</th>
+                <th>Date</th>
                 <th>Malade</th>
                 <th>Score</th>
             </tr>
@@ -32,7 +36,7 @@
                 <td th:text="${p.malade}"></td>
                 <td th:text="${p.score}"></td>
                 <td><a onclick="return confirm('Etes vous sure')" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-danger">Delete </a> </td>
-                <td> <a th:href="@{/admin/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-secondary">Edit</a></td>
+                <td> <a th:href="@{/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-secondary">Edit</a></td>
 
 
             </tr>
@@ -48,6 +52,6 @@
     </div>
 </div>
 </div>
-
+</div>
 </body>
 </html>

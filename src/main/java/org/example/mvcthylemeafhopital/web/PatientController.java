@@ -12,8 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import jakarta.validation.Valid;
 
 @Controller
 @AllArgsConstructor
@@ -41,13 +40,19 @@ public class PatientController {
         return "redirect:/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/admin/formPatients")
+    @PostMapping(path = "/save")
+    public String save(@Valid Patient patient, BindingResult bindingResult, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword){
+        if(bindingResult.hasErrors()) return "formPatients";
+        patientRepository.save(patient);
+        return "redirect:/index?page="+page+"&keyword="+keyword;
+    }
+    @GetMapping("/formPatients")
     public String formPatient(Model model){
         model.addAttribute("patient", new Patient());
         return "formPatients";
     }
 
-    @GetMapping("/admin/editPatient")
+    @GetMapping("/editPatient")
     public String editPatient(Model model, Long id, String keyword, int page){
 
         Patient patient = patientRepository.findById(id).orElse(null);
@@ -55,9 +60,12 @@ public class PatientController {
         model.addAttribute(patient);
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
-        return "editPatient";
+        return "index";
 
     };
-
+    @GetMapping("/")
+    public String home(){
+        return "redirect:/index";
+    }
 
 }
