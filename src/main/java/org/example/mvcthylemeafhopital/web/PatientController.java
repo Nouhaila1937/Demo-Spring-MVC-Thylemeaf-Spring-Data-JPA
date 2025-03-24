@@ -60,7 +60,7 @@ public class PatientController {
         model.addAttribute(patient);
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
-        return "index";
+        return "editPatient";
 
     };
     @GetMapping("/")
