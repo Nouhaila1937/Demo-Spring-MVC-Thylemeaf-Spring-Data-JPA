@@ -18,7 +18,7 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
     }
 
     public void run(String ...args){
-        Patient patient = new Patient();
+       /* Patient patient = new Patient();
         patient.setId(null);
         patient.setNom("Nouhaila");
         patient.setDateNaissance(new Date());
@@ -28,7 +28,7 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
 
 
         patientRepository.save(new Patient(null,"ahmed",new Date(),true,22));
-
+*/
 
 
     }
