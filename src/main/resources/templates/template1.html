@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet"  type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -20,7 +21,9 @@
                     Patients
                 </a>
                 <ul class="dropdown-menu">
+                    <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                     <li><a class="dropdown-item" th:href="@{/admin/formPatients}">Nouveau</a></li>
+                        </td>
                     <li><a class="dropdown-item" th:href="@{/index}">Chercher</a></li>
 
                 </ul>

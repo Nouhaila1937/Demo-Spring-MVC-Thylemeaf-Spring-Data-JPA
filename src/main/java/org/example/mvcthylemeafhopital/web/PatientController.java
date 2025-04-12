@@ -6,6 +6,7 @@ import org.example.mvcthylemeafhopital.entities.Patient;
 import org.example.mvcthylemeafhopital.repository.PatientRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,8 @@ public class PatientController {
         return "patients";
     }
     @GetMapping("/admin/delete")
+    // si on a utilisé sécurité par notation
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String delete(Long id, String keyword, int page){
         patientRepository.deleteById(id);
 
