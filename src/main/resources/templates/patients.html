@@ -15,7 +15,7 @@
 <div class="card">
     <div class="card-header"> Liste Patients </div>
     <div class="card-body">
-        <form method="get" th:action="@{index}">
+        <form method="get" th:action="@{/index}">
             <label>Keyword:</label>
             <input type="text" name="keyword">
             <button type="submit" class="btn btn-info">Chercher</button>
@@ -36,7 +36,7 @@
                 <td th:text="${p.malade}"></td>
                 <td th:text="${p.score}"></td>
                 <td><a onclick="return confirm('Etes vous sure')" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-danger">Delete </a> </td>
-                <td> <a th:href="@{/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-secondary">Edit</a></td>
+                <td> <a th:href="@{/admin/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-secondary">Edit</a></td>
 
 
             </tr>

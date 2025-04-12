@@ -40,19 +40,19 @@ public class PatientController {
         return "redirect:/index?page="+page+"&keyword="+keyword;
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/admin/save")
     public String save(@Valid Patient patient, BindingResult bindingResult, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword){
-        if(bindingResult.hasErrors()) return "formPatients";
+        if(bindingResult.hasErrors()) return "/admin/formPatients";
         patientRepository.save(patient);
         return "redirect:/index?page="+page+"&keyword="+keyword;
     }
-    @GetMapping("/formPatients")
+    @GetMapping("/admin/formPatients")
     public String formPatient(Model model){
         model.addAttribute("patient", new Patient());
-        return "formPatients";
+        return "/formPatients";
     }
 
-    @GetMapping("/editPatient")
+    @GetMapping("/admin/editPatient")
     public String editPatient(Model model, Long id, String keyword, int page){
 
         Patient patient = patientRepository.findById(id).orElse(null);
@@ -60,7 +60,7 @@ public class PatientController {
         model.addAttribute(patient);
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
-        return "editPatient";
+        return "/editPatient";
 
     };
     @GetMapping("/")

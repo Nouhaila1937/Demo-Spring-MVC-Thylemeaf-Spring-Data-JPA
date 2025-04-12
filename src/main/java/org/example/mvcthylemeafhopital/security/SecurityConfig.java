@@ -26,8 +26,8 @@ public class SecurityConfig {
    // c'est ici ou on met des utilisateur qui vont se connecter au forum de spring en premier
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
-                // {noop} = no password encoder parceque si je laisse le password comme il est il ne vas pas travailler 7itach spring kay3ref pass encoder safi
-                User.withUsername("user").password("{noop}1234").roles("USER").build(),
+                // password("{noop}1234") = no password encoder parceque si je laisse le password comme il est il ne vas pas travailler 7itach spring kay3ref pass encoder safi
+                User.withUsername("user").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("user2").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("admin").password(passwordEncoder.encode("1234")).roles("USER", "ADMIN").build()
         );
@@ -36,8 +36,8 @@ public class SecurityConfig {
     @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.formLogin();
-//        httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
-//        httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         return httpSecurity.build();
 
