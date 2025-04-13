@@ -2,6 +2,7 @@ package org.example.mvcthylemeafhopital;
 
 import org.example.mvcthylemeafhopital.entities.Patient;
 import org.example.mvcthylemeafhopital.repository.PatientRepository;
+import org.example.mvcthylemeafhopital.security.repo.sercvice.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -57,5 +58,18 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
     @Bean
     PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(AccountService accountService) {
+        return args -> {
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+            accountService.addNewUser("user23","1234","1234","user23@gmail.com");
+            accountService.addNewUser("user24","1234","1234","user24@gmail.com");
+            accountService.addRoleToUser("user23","USER");
+            accountService.addRoleToUser("user24","USER");
+            accountService.addRoleToUser("user24","ADMIN");
+        };
     }
 }
