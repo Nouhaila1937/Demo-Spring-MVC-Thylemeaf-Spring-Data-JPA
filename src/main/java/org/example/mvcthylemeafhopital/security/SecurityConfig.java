@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
@@ -18,13 +19,12 @@ import javax.sql.DataSource;
 public class SecurityConfig {
   @Autowired
     private PasswordEncoder passwordEncoder;
- /*
     @Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
         return new JdbcUserDetailsManager(dataSource);
     }
-   */
-   @Bean
+
+   //@Bean si on met le bean en commentaire il ne va pas etre créé
    // c'est ici ou on met des utilisateur qui vont se connecter au forum de spring en premier
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
@@ -38,6 +38,8 @@ public class SecurityConfig {
     @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.formLogin();
+        // pour rediriger automatiquement vers le home lorsque se connecte
+//        httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
 //        httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
 //        httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
