@@ -38,10 +38,10 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
 */
 
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager){
         return args -> {
-            jdbcUserDetailsManager.createUser(User.withUsername("user11").password(passwordEncoder().encode("1234")).roles("USER").build());
+            jdbcUserDetailsManager.createUser(User.withUsername("user1").password(passwordEncoder().encode("1234")).roles("USER").build());
             jdbcUserDetailsManager.createUser(User.withUsername("user22").password(passwordEncoder().encode("1234")).roles("USER").build());
             jdbcUserDetailsManager.createUser(User.withUsername("admin2").password(passwordEncoder().encode("1234")).roles("USER","ADMIN").build());
             UserDetails u1=jdbcUserDetailsManager.loadUserByUsername("user11");
@@ -61,7 +61,7 @@ public class MvcThylemeafHopitalApplication implements CommandLineRunner {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(AccountService accountService) {
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService) {
         return args -> {
             accountService.addNewRole("USER");
             accountService.addNewRole("ADMIN");

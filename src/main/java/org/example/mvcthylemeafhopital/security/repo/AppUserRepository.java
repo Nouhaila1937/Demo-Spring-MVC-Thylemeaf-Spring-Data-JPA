@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AppUserRepository extends JpaRepository<AppUser, String> {
-    AppUser findByUsername(String username);
+    AppUser findByUserName(String username);
 }

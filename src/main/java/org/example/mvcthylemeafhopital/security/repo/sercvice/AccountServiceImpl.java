@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     private AppRoleRepository appRoleRepository;
     @Override
     public AppUser addNewUser(String username, String password, String confirmpassword, String email) {
-       AppUser appUser = appUserRepository.findByUsername(username);
+       AppUser appUser = appUserRepository.findByUserName(username);
        if(appUser != null) throw new RuntimeException("User already exists");
        if(!password.equals(confirmpassword)) throw new RuntimeException("Passwords do not match");
         appUser = AppUser.builder()
@@ -46,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String role) {
-        AppUser appUser = appUserRepository.findByUsername(username);
+        AppUser appUser = appUserRepository.findByUserName(username);
         AppRole appRole = appRoleRepository.findById(role).get();
         appUser.getRoles().add(appRole);
         //appUserRepository.save(appUser); la méthode il est transactionnel donc cette ligne n'est pas obligatoire
@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void removeRoleFromUser(String username, String role) {
-        AppUser appUser = appUserRepository.findByUsername(username);
+        AppUser appUser = appUserRepository.findByUserName(username);
 
     }
 
